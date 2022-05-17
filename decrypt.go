@@ -6,24 +6,20 @@ import (
 )
 
 func main() {
-
-	encryptedData, _ := ioutil.ReadFile("file.txt")
-
-	buffer := []byte{}
+	encryptedData, _ := ioutil.ReadFile("Noew.SAM")
+	swapBuffer := []byte{}
 	outBuffer := []byte{}
 	for _, b := range encryptedData {
-		buffer = append(buffer, b)
-		if len(buffer) == 4 {
-			for i := 0; i < 4; i++ {
-				outBuffer = append(outBuffer, buffer[i])
+		swapBuffer = append(swapBuffer, b)
+		if len(swapBuffer) == 4 {
+			for i := 3; i >= 0; i-- {
+				outBuffer = append(outBuffer, swapBuffer[i])
 			}
-			buffer = []byte{}
+			swapBuffer = []byte{}
 		}
 	}
-	for i := 0; i < len(buffer); i++ {
-		outBuffer = append(outBuffer, buffer[i])
+	for i := len(swapBuffer) - 1; i >= 0; i-- {
+		outBuffer = append(outBuffer, swapBuffer[i])
 	}
-
 	os.WriteFile("out.ex_", outBuffer, 0644)
-
 }
